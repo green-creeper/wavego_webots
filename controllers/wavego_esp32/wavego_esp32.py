@@ -19,7 +19,6 @@ if camera:
 else:
     print("Warning: Camera device not found!")
 
-
 # Initialize motors
 motors = {}
 for leg in range(1, 5):
@@ -31,19 +30,31 @@ for leg in range(1, 5):
         else:
             print(f"Warning: Motor {name}_motor not found!")
 
-# Optional mapping multipliers (in case URDF joint axes are inverted)
-# By default, multiply by 1. We will calibrate these signs later.
-# Invert leg_ mapping because negative angle swings forward in IK but backward in Webots
+# After empirical testing in Webots:
+# 'servo_x' motor in URDF controls Hip Roll (Side/Spread) [IK 'wiggle']
+# 'leg_x' motor in URDF controls Hip Pitch (Forward/Back) [IK 'fore']
+# 'foot_x' motor in URDF controls Knee Pitch (Up/Down) [IK 'back']
+# 
+# IK outputs angle logic assuming positive is forward/out.
+# We determine multipliers mathematically based on URDF layout:
+# Leg 1 (Front Right), Leg 2 (Front Left), Leg 3 (Rear Right), Leg 4 (Rear Left)
 AXIS_MAPPING = {
-    'servo_1': 1, 'leg_1': -1, 'foot_1': 1,
-    'servo_2': 1, 'leg_2': -1, 'foot_2': 1,
-    'servo_3': 1, 'leg_3': -1, 'foot_3': 1,
-    'servo_4': 1, 'leg_4': -1, 'foot_4': 1,
+    # Front Right
+    'servo_1': -1, 'leg_1': 1,  'foot_1': 1,
+    # Front Left
+    'servo_2': 1,  'leg_2': 1,  'foot_2': 1,
+    # Rear Right (Inverted URDF axes for Pitch)
+    'servo_3': 1,  'leg_3': -1, 'foot_3': -1,
+    # Rear Left (Inverted URDF axes for Pitch)
+    'servo_4': -1, 'leg_4': -1, 'foot_4': -1,
 }
 
 def apply_leg_angles(leg_num, wiggle_deg, fore_deg, back_deg):
     """
     Applies the raw ESP32 servo angles (in degrees) to the Webots motors (in radians).
+    - wiggle_deg (Hip Roll, Side/Spread) maps to 'servo_x'
+    - fore_deg (Hip Pitch, Forward/Back) maps to 'leg_x'
+    - back_deg (Knee Pitch, Up/Down) maps to 'foot_x'
     """
     if f"servo_{leg_num}" in motors:
         val = math.radians(wiggle_deg) * AXIS_MAPPING[f"servo_{leg_num}"]

@@ -119,20 +119,20 @@ def triangularGait(global_input, direction_angle, turn_cmd):
 
     out = {}
     if not turn_cmd:
-        out[1] = singleGaitCtrl(1, 1.0, stepA, direction_angle, WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z - bInput)
-        out[4] = singleGaitCtrl(4, 1.0, stepD, -direction_angle, -WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z + bInput)
-        out[2] = singleGaitCtrl(2, 1.0, stepB, direction_angle, -WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z - bInput)
-        out[3] = singleGaitCtrl(3, 1.0, stepC, -direction_angle, WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z + bInput)
+        out[1] = singleGaitCtrl(1, 1.0, stepA, direction_angle, WALK_EXTENDED_X - aInput - bInput, WALK_EXTENDED_Z)
+        out[4] = singleGaitCtrl(4, 1.0, stepD, -direction_angle, -WALK_EXTENDED_X - aInput + bInput, WALK_EXTENDED_Z)
+        out[2] = singleGaitCtrl(2, 1.0, stepB, direction_angle, -WALK_EXTENDED_X - aInput - bInput, WALK_EXTENDED_Z)
+        out[3] = singleGaitCtrl(3, 1.0, stepC, -direction_angle, WALK_EXTENDED_X - aInput + bInput, WALK_EXTENDED_Z)
     elif turn_cmd == -1:
-        out[1] = singleGaitCtrl(1, 1.5, stepA, 90.0, WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z - bInput)
-        out[4] = singleGaitCtrl(4, 1.5, stepD, 90.0, -WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z + bInput)
-        out[2] = singleGaitCtrl(2, 1.5, stepB, -90.0, -WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z - bInput)
-        out[3] = singleGaitCtrl(3, 1.5, stepC, -90.0, WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z + bInput)
+        out[1] = singleGaitCtrl(1, 1.5, stepA, 90.0, WALK_EXTENDED_X - aInput - bInput, WALK_EXTENDED_Z)
+        out[4] = singleGaitCtrl(4, 1.5, stepD, 90.0, -WALK_EXTENDED_X - aInput + bInput, WALK_EXTENDED_Z)
+        out[2] = singleGaitCtrl(2, 1.5, stepB, -90.0, -WALK_EXTENDED_X - aInput - bInput, WALK_EXTENDED_Z)
+        out[3] = singleGaitCtrl(3, 1.5, stepC, -90.0, WALK_EXTENDED_X - aInput + bInput, WALK_EXTENDED_Z)
     elif turn_cmd == 1:
-        out[1] = singleGaitCtrl(1, 1.5, stepA, -90.0, WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z - bInput)
-        out[4] = singleGaitCtrl(4, 1.5, stepD, -90.0, -WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z + bInput)
-        out[2] = singleGaitCtrl(2, 1.5, stepB, 90.0, -WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z - bInput)
-        out[3] = singleGaitCtrl(3, 1.5, stepC, 90.0, WALK_EXTENDED_X - aInput, WALK_EXTENDED_Z + bInput)
+        out[1] = singleGaitCtrl(1, 1.5, stepA, -90.0, WALK_EXTENDED_X - aInput - bInput, WALK_EXTENDED_Z)
+        out[4] = singleGaitCtrl(4, 1.5, stepD, -90.0, -WALK_EXTENDED_X - aInput + bInput, WALK_EXTENDED_Z)
+        out[2] = singleGaitCtrl(2, 1.5, stepB, 90.0, -WALK_EXTENDED_X - aInput - bInput, WALK_EXTENDED_Z)
+        out[3] = singleGaitCtrl(3, 1.5, stepC, 90.0, WALK_EXTENDED_X - aInput + bInput, WALK_EXTENDED_Z)
         
     return out
 
