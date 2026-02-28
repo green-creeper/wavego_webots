@@ -1,0 +1,314 @@
+#VRML_SIM R2025a utf8
+
+PROTO Wavego [
+  field SFVec3f    translation 0 0 0
+  field SFRotation rotation    0 0 1 0
+  field SFString   name        "wavego"
+  field SFString   controller  "<generic>"
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    controller IS controller
+    children [
+      Camera {
+        translation 0.08 0 0.04
+        rotation 0 0 1 0
+        name "camera"
+        fieldOfView 1.0
+        width 640
+        height 480
+      }
+      Shape {
+        appearance PBRAppearance { baseColor 0.8 0.8 0.8 roughness 0.5 }
+        geometry Mesh { url "meshes/base_link.STL" }
+      }
+
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 1.0 0.0 0.0
+              anchor 0.0492951218109149 -0.0235467065517865 0.024
+            }
+            device [
+              RotationalMotor { name "servo_1_motor" }
+              PositionSensor { name "servo_1_sensor" }
+            ]
+            endPoint Solid {
+              name "servo_1_link"
+              translation 0.0492951218109149 -0.0235467065517865 0.024
+              rotation 0.9999999999999998 0.0 0.0 1.19325088290338
+              children [
+                Shape {
+                  appearance PBRAppearance { baseColor 0.2 0.2 0.2 }
+                  geometry Mesh { url "meshes/servo_1_link.STL" }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.0 0.0 -1.0
+                    anchor 0.015 -0.013 -0.00280397218834483
+                  }
+                  device [
+                    RotationalMotor { name "leg_1_motor" }
+                    PositionSensor { name "leg_1_sensor" }
+                  ]
+                  endPoint Solid {
+                    name "leg_1_link"
+                    translation 0.015 -0.013 -0.00280397218834483
+                    rotation 0.0 0.0 0.9999999999999994 0.6250002676343233
+                    children [
+                      Shape {
+                        appearance PBRAppearance { baseColor 0.5 0.5 0.5 }
+                        geometry Mesh { url "meshes/leg_1_link.STL" }
+                      }
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0.0 0.0 1.0
+                          anchor -0.04 0.0 -0.00998527475373712
+                        }
+                        device [
+                          RotationalMotor { name "foot_1_motor" }
+                          PositionSensor { name "foot_1_sensor" }
+                        ]
+                        endPoint Solid {
+                          name "foot_1_link"
+                          translation -0.04 0.0 -0.00998527475373712
+                          rotation 0.8677263535389027 -0.49704222695267974 -8.029938730172922e-16 3.1415926535897905
+                          children [
+                            Shape {
+                              appearance PBRAppearance { baseColor 0.1 0.1 0.1 }
+                              geometry Mesh { url "meshes/foot_1_link.STL" }
+                            }
+                          ]
+                          boundingObject Mesh { url "meshes/foot_1_link.STL" }
+                          physics Physics { density -1 mass 0.01 centerOfMass [0.0396009603573879 0.00562254465841069 -0.0302219540967466] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+                        }
+                      }
+                    ]
+                    boundingObject Mesh { url "meshes/foot_1_link.STL" }
+                    physics Physics { density -1 mass 0.01 centerOfMass [-0.02 -6.78276879106932e-14 0.0153039721883448] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+                  }
+                }
+              ]
+              boundingObject Mesh { url "meshes/foot_1_link.STL" }
+              physics Physics { density -1 mass 0.020715840734641 centerOfMass [0.015 -0.00663800305531337 -0.000639346575707883] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 1.0 0.0 0.0
+              anchor -0.0507048781890851 -0.0235467065517864 0.024
+            }
+            device [
+              RotationalMotor { name "servo_2_motor" }
+              PositionSensor { name "servo_2_sensor" }
+            ]
+            endPoint Solid {
+              name "servo_2_link"
+              translation -0.0507048781890851 -0.0235467065517864 0.024
+              rotation 1.0000000000000002 0.0 0.0 1.3864414706398698
+              children [
+                Shape {
+                  appearance PBRAppearance { baseColor 0.2 0.2 0.2 }
+                  geometry Mesh { url "meshes/servo_2_link.STL" }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.0 0.0 -1.0
+                    anchor -0.015 -0.013 0.00298261436575352
+                  }
+                  device [
+                    RotationalMotor { name "leg_2_motor" }
+                    PositionSensor { name "leg_2_sensor" }
+                  ]
+                  endPoint Solid {
+                    name "leg_2_link"
+                    translation -0.015 -0.013 0.00298261436575352
+                    rotation 0.0 0.0 0.9999999999999993 0.6716199430252423
+                    children [
+                      Shape {
+                        appearance PBRAppearance { baseColor 0.5 0.5 0.5 }
+                        geometry Mesh { url "meshes/leg_2_link.STL" }
+                      }
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0.0 0.0 1.0
+                          anchor -0.0399999999999991 0.0 -0.0049140967243233
+                        }
+                        device [
+                          RotationalMotor { name "foot_2_motor" }
+                          PositionSensor { name "foot_2_sensor" }
+                        ]
+                        endPoint Solid {
+                          name "foot_2_link"
+                          translation -0.0399999999999991 0.0 -0.0049140967243233
+                          rotation -0.857170516462384 0.5150327229483675 -8.320583212144768e-16 3.1415926535897905
+                          children [
+                            Shape {
+                              appearance PBRAppearance { baseColor 0.1 0.1 0.1 }
+                              geometry Mesh { url "meshes/foot_2_link.STL" }
+                            }
+                          ]
+                          boundingObject Mesh { url "meshes/foot_2_link.STL" }
+                          physics Physics { density -1 mass 0.01 centerOfMass [0.0396009603573874 0.00562254465841142 -0.0193641895132344] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+                        }
+                      }
+                    ]
+                    boundingObject Mesh { url "meshes/foot_2_link.STL" }
+                    physics Physics { density -1 mass 0.01 centerOfMass [-0.0199999999999991 -2.4980018054066e-16 0.00951738563424648] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+                  }
+                }
+              ]
+              boundingObject Mesh { url "meshes/foot_2_link.STL" }
+              physics Physics { density -1 mass 0.020715840734641 centerOfMass [-0.015 -0.00663800305531345 -0.000639346575707883] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis -1.0 0.0 0.0
+              anchor -0.0507048781890851 0.0284532934482131 0.0240000000000004
+            }
+            device [
+              RotationalMotor { name "servo_3_motor" }
+              PositionSensor { name "servo_3_sensor" }
+            ]
+            endPoint Solid {
+              name "servo_3_link"
+              translation -0.0507048781890851 0.0284532934482131 0.0240000000000004
+              rotation 1.0648571164114607e-15 0.6591319937956284 0.7520272699543545 3.141592653589791
+              children [
+                Shape {
+                  appearance PBRAppearance { baseColor 0.2 0.2 0.2 }
+                  geometry Mesh { url "meshes/servo_3_link.STL" }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.0 0.0 1.0
+                    anchor 0.0149999999999994 -0.0129999999999998 0.0100859229791846
+                  }
+                  device [
+                    RotationalMotor { name "leg_3_motor" }
+                    PositionSensor { name "leg_3_sensor" }
+                  ]
+                  endPoint Solid {
+                    name "leg_3_link"
+                    translation 0.0149999999999994 -0.0129999999999998 0.0100859229791846
+                    rotation 0.0 0.0 -1.0000000000000004 0.5242065067948939
+                    children [
+                      Shape {
+                        appearance PBRAppearance { baseColor 0.5 0.5 0.5 }
+                        geometry Mesh { url "meshes/leg_3_link.STL" }
+                      }
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0.0 0.0 -1.0
+                          anchor 0.04 0.0 0.0
+                        }
+                        device [
+                          RotationalMotor { name "foot_3_motor" }
+                          PositionSensor { name "foot_3_sensor" }
+                        ]
+                        endPoint Solid {
+                          name "foot_3_link"
+                          translation 0.04 0.0 0.0
+                          rotation -0.8577544235294388 -0.5140596744694922 8.304863180237698e-16 3.1415926535897905
+                          children [
+                            Shape {
+                              appearance PBRAppearance { baseColor 0.1 0.1 0.1 }
+                              geometry Mesh { url "meshes/foot_3_link.STL" }
+                            }
+                          ]
+                          boundingObject Mesh { url "meshes/foot_3_link.STL" }
+                          physics Physics { density -1 mass 0.01 centerOfMass [-0.0396009603573878 0.00562254465841165 -0.00734678417548039] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+                        }
+                      }
+                    ]
+                    boundingObject Mesh { url "meshes/foot_3_link.STL" }
+                    physics Physics { density -1 mass 0.01 centerOfMass [0.02 0.0 0.00241407702081536] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+                  }
+                }
+              ]
+              boundingObject Mesh { url "meshes/foot_3_link.STL" }
+              physics Physics { density -1 mass 0.020715840734641 centerOfMass [0.015 -0.00663800305531345 -0.000639346575707883] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis -1.0 0.0 0.0
+              anchor 0.0492951218109149 0.0284532934482133 0.0239999999999998
+            }
+            device [
+              RotationalMotor { name "servo_4_motor" }
+              PositionSensor { name "servo_4_sensor" }
+            ]
+            endPoint Solid {
+              name "servo_4_link"
+              translation 0.0492951218109149 0.0284532934482133 0.0239999999999998
+              rotation 9.466392632418563e-16 0.5859567592397356 0.810342320443198 3.1415926535897905
+              children [
+                Shape {
+                  appearance PBRAppearance { baseColor 0.2 0.2 0.2 }
+                  geometry Mesh { url "meshes/servo_4_link.STL" }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.0 0.0 1.0
+                    anchor -0.0150000000000001 -0.013 0.0104908137521414
+                  }
+                  device [
+                    RotationalMotor { name "leg_4_motor" }
+                    PositionSensor { name "leg_4_sensor" }
+                  ]
+                  endPoint Solid {
+                    name "leg_4_link"
+                    translation -0.0150000000000001 -0.013 0.0104908137521414
+                    rotation 0.0 0.0 -1.0000000000000004 0.6254280822385536
+                    children [
+                      Shape {
+                        appearance PBRAppearance { baseColor 0.5 0.5 0.5 }
+                        geometry Mesh { url "meshes/leg_4_link.STL" }
+                      }
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0.0 0.0 -1.0
+                          anchor 0.04 0.0 0.0
+                        }
+                        device [
+                          RotationalMotor { name "foot_4_motor" }
+                          PositionSensor { name "foot_4_sensor" }
+                        ]
+                        endPoint Solid {
+                          name "foot_4_link"
+                          translation 0.04 0.0 0.0
+                          rotation -0.8237268545019927 -0.5669868333323562 9.159925023648013e-16 3.1415926535897905
+                          children [
+                            Shape {
+                              appearance PBRAppearance { baseColor 0.1 0.1 0.1 }
+                              geometry Mesh { url "meshes/foot_4_link.STL" }
+                            }
+                          ]
+                          boundingObject Mesh { url "meshes/foot_4_link.STL" }
+                          physics Physics { density -1 mass 0.01 centerOfMass [-0.0396009603573879 0.00562254465841092 -0.00694189340252346] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+                        }
+                      }
+                    ]
+                    boundingObject Mesh { url "meshes/foot_4_link.STL" }
+                    physics Physics { density -1 mass 0.01 centerOfMass [0.02 0.0 0.00200918624785887] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+                  }
+                }
+              ]
+              boundingObject Mesh { url "meshes/foot_4_link.STL" }
+              physics Physics { density -1 mass 0.020715840734641 centerOfMass [-0.015 -0.00663800305531342 -0.000639346575707883] inertiaMatrix [ 0.0001 0.0001 0.0001 0 0 0 ] }
+            }
+          }
+    ]
+    boundingObject Box { size 0.1 0.2 0.05 }
+    physics Physics {
+      density -1
+      mass 0.382892713953797
+      centerOfMass [-0.000611071768748985 0.00203532044672235 0.0265273092708457]
+      inertiaMatrix [ 0.005 0.005 0.005 0 0 0 ]
+    }
+  }
+}

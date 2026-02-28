@@ -1,0 +1,37 @@
+# Environment variables
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# Python artifacts
+*.pyc
+__pycache__/
+*.pyd
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Webots cached files
+.cache/
+build/
+*.bak
+*.wbt.bak
+*.wbo
+*.log
+.apartment.wbproj
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
