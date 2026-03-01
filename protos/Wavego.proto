@@ -304,7 +304,7 @@ PROTO Wavego [
             }
           }
     ]
-    boundingObject Box { size 0.1 0.2 0.05 }
+    boundingObject Box { size 0.09 0.06 0.035 }
     physics Physics {
       density -1
       mass 0.382892713953797

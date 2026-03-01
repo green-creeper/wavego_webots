@@ -16,15 +16,16 @@ The robot is fully modeled using accurate masses, centers of mass, and nested ro
 **Physics Stability:** 
 Simulating highly detailed STL collision meshes on extremely lightweight parts (e.g. 10g shins) often causes physics ODE engines to explode. The robot in this project uses perfectly fitted primitive collision geometries (`Sphere` and `Box`) paired with explicit inertia matrices (`[0.0001 0.0001 ... ]`) to guarantee absolute numerical stability. The robot refuses to jitter or collapse.
 
-### 2. The Kinematics Engine (`esp32_kinematics.py`)
-To mimic the physical robot, we extracted the exact C++ Inverse Kinematics (IK) and Gait Generation math written for the Wavego's ESP32 microcontroller and ported it into a pure Python module. 
-- It accurately calculates `triangularGait` locomotion based on `x, y, z` inputs.
-- It bypasses the parallel-linkage equations of the real robot and instead uses robust **Serial Analytical IK** to perfectly map the resulting foot positions to the Webots URDF model.
+### 2. The Kinematics Engine (`gait_generator.py`)
+To mimic the physical robot, we implemented a brand new, clean, Object-Oriented **Mathematical Joint-Space Gait Generator** in pure Python.
+- It bypasses the parallel-linkage equations and complex Inverse Kinematics entirely.
+- It accurately calculates a smooth `triangularGait` locomotion using explicit sine waves for the knee lift and linear interpolation for the thigh thrust.
+- It directly maps the resulting angles into the Webots URDF model's physical constraints.
 
-### 3. The Webots Controller (`wavego_esp32.py`)
+### 3. The Webots Controller (`wavego.py`)
 This is the main interaction script. It acts as the bridge between the simulated ESP32 kinematics and the Webots simulation environment.
 - It instantiates the Webots `Robot` API and camera devices.
-- It continuously loops the gait cycle, queries the `esp32_kinematics` module for the exact joint angles needed, and sends positional commands directly to the 12 virtual motors in real-time.
+- It continuously loops the gait cycle, querying the `gait_generator` module for the exact joint angles needed, and sends positional commands directly to the 12 virtual motors in real-time.
 
 ## 🚀 Getting Started
 
@@ -36,13 +37,13 @@ This is the main interaction script. It acts as the bridge between the simulated
 1. Clone this repository.
 2. Open Webots.
 3. Open the world file: `File -> Open World...` and select `worlds/apartment.wbt`.
-4. The simulation will automatically load the `Wavego` robot and its `wavego_esp32` Python controller.
+4. The simulation will automatically load the `Wavego` robot and its `wavego` Python controller.
 5. Click **Run** (Play) in Webots. 
 6. The robot will stand up and automatically march forward using the simulated triangular gait! You can view its POV by double toggling the Camera overlay.
 
 ## 📁 Project Structure
 
-* `/controllers/wavego_esp32/` - Contains the main running script and the isolated ESP32 kinematics translation module.
+* `/controllers/wavego/` - Contains the main running script `wavego.py` and the `gait_generator.py` module.
 * `/worlds/` - Contains the `apartment.wbt` test environment where the robot is spawned.
 * `/protos/` - Contains the Webots PROTO definition and the STLs `meshes/` for the Wavego dog.
 * `RobotAssembly.SLDASM` & `.STEP` - The original raw SolidWorks / CAD geometries.
